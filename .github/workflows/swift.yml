@@ -12,7 +12,7 @@ jobs:
       matrix:
         include:
           - xcode: "16.0"
-            deployment_target: ""
+            deployment_target: " 15.0"
     runs-on:  self-hosted
     steps:
       - uses: actions/checkout@v4
