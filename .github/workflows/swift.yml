@@ -12,7 +12,7 @@ jobs:
       matrix:
         include:
           - xcode: "16.0"
-            deployment_target: "production"
+            deployment_target: ""
     runs-on:  self-hosted
     steps:
       - uses: actions/checkout@v4
@@ -21,7 +21,7 @@ jobs:
         run: ./other/download_libs.sh --arch arm64
 
       - name: Build
-        run: xcodebuild -project iina.xcodeproj ONLY_ACTIVE_ARCH=YES -scheme iina -configuration Nightly ${{ matrix.deployment_target }}
+        run: xcodebuild -project iina.xcodeproj ONLY_ACTIVE_ARCH=YES -scheme iina -configuration production ${{ matrix.deployment_target }}
         env:
           DEVELOPER_DIR: /Applications/Xcode.app/Contents/Developer
 
