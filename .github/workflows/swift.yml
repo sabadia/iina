@@ -11,9 +11,9 @@ jobs:
     strategy:
       matrix:
         include:
-          - xcode: "15.4"
+          - xcode: "16.0"
             deployment_target: "production"
-    runs-on:  macos-latest-xlarge
+    runs-on:  self-hosted
     steps:
       - uses: actions/checkout@v4
 
@@ -23,10 +23,10 @@ jobs:
       - name: Build
         run: xcodebuild -project iina.xcodeproj ONLY_ACTIVE_ARCH=YES -scheme iina -configuration Nightly ${{ matrix.deployment_target }}
         env:
-          DEVELOPER_DIR: /Applications/Xcode_${{ matrix.xcode }}.app/Contents/Developer
+          DEVELOPER_DIR: /Applications/Xcode.app/Contents/Developer
 
       - name: Archive
-        run: tar cvJf ~/iina.tar.xz -C /Users/runner/Library/Developer/Xcode/DerivedData/iina-csbkugdtxazzqogjnydbothqrvib/Build/Products/IINA.app 
+        run: tar cvJf ~/iina.tar.xz -C /Users/mahamudul/Library/Developer/Xcode/DerivedData/iina-csbkugdtxazzqogjnydbothqrvib/Build/Products/IINA.app 
 
       - name: Save artifacts
         uses: actions/upload-artifact@v4
